@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const axios = require("axios");
 const logger = require("morgan")
 const cheerio = require("cheerio");
-let result = {};
+// let result = {};
 // var db = require("./models")
 
 const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
@@ -27,21 +27,19 @@ app.get("/scrape", function(req, res){
     // console.log(response.data)
     
     const $ = cheerio.load(response.data);
-    const title = $('.article-name')
-    console.log(title.text())
-    $(".search-result-news").each(function(i,element){
-        // result = {};
-        // result.title = $(this)
+    // const title = $('.article-name')
+    // console.log(title.text())
+    $(".article-name").each(function(i,element){
+        let result = {};
+        result.title = $(this)
         // .children("h3")
-        // .text()
-        result.summary = $(this)
-        .children(".synopsis")
-        .text()
+        .html()
         
-
+        console.log(result)
+        
     })
 
-    console.log(result)
+    
 
 
 
