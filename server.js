@@ -29,15 +29,38 @@ app.get("/scrape", function(req, res){
     const $ = cheerio.load(response.data);
     // const title = $('.article-name')
     // console.log(title.text())
-    $(".article-name").each(function(i,element){
+    $("div.listingResult").each(function(i,element){
         let result = {};
         result.title = $(this)
-        // .children("h3")
-        .html()
+        .children("a")
+        .children('article')
+        .children('.content')
+        .children('header')
+        .children('h3')
+        .text()
+
+        result.summary = $(this)
+        .children("a")
+        .children('article')
+        .children('.content')
+        .children('.synopsis')
+        .text()
+
+
         
         console.log(result)
         
     })
+    
+    // $(".article-name").each(function(i,element){
+    //     let result = {};
+    //     result.title = $(this)
+    //     // .children("h3")
+    //     .text()
+        
+    //     console.log(result)
+        
+    // })
 
     
 
