@@ -46,6 +46,10 @@ app.get("/scrape", function(req, res){
         .children('.synopsis')
         .text()
 
+        result.url = $(this)
+        .children(".article-link")
+        .attr('href')
+        
 
         
         console.log(result)
