@@ -1,5 +1,5 @@
 const express = require("express");
-const handlebars = require("express-handlebars");
+const exphbs = require("express-handlebars");
 const mongoose = require("mongoose");
 const axios = require("axios");
 const logger = require("morgan");
@@ -25,6 +25,15 @@ app.use(express.static("public"));
 
 // mongoose.connect(MONGODB_URI)
 // mongoose.connect("mongodb://localhost/spaceNews", { useNewUrlParser: true})
+app.engine(
+  "handlebars",
+  exphbs({
+    defaultLayout: "main"
+  })
+);
+app.set("view engine", "handlebars");
+
+
 
 app.get("/scrape", function(req, res) {
   axios.get("https://www.space.com/news").then(function(response) {
@@ -64,16 +73,7 @@ app.get("/scrape", function(req, res) {
             console.log(scrapedArticle)
           })
         } 
-        // function(err, inserted){
-        //   if(err){
-        //     console.log("err")
-        //   }
-        //   else {
-        //     console.log(inserted)
-        //   }
-        // });
-      
-        // };
+       
     });
 
   
@@ -81,6 +81,71 @@ app.get("/scrape", function(req, res) {
   
   });
 });
+
+//Html Routes
+
+app.get("/articles", (req, res) => {
+  db.Article.find({})
+  .then(function(dbArticle){
+      res.render("index", {
+        Article: dbArticle
+      })
+    // res.json(dbArticle)
+  })
+  .catch((err) =>{
+    res.json(err);
+  });
+
+})
+
+
+// app.get("/articles/:id", (req,res)=>{
+//   db.Article.findOne({ _id: req.params.id})
+//   .populate("note")
+//   .then((dbArticle)=> {
+//       res.json(dbArticle);
+//   })
+//   .catch((err)=>{
+//     res.json(err);
+//   })
+// })
+
+// app.post("/articles/:id", (req,res) =>{
+//   db.Note.create(req.body)
+//   .then(function(dbNote){
+
+
+//     return db.Article.findOneAndUpdate({ 
+//       _id: req.params.id
+//     }, 
+//     {
+//       note : dbNote._id
+//     },
+//     {
+//       new:true
+//     })
+//     .then((dbArticle) =>{
+//       res.json(dbArticle)
+//     })
+//         .catch((err)=>{
+//       res.json(err)
+    
+//   });
+// });
+// })
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 app.listen(PORT, () => {
   console.log("App is running on port " + PORT);
