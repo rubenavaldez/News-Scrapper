@@ -23,7 +23,8 @@ app.use(express.json());
 
 app.use(express.static("public"));
 
-mongoose.connect("mongodb://localhost/spaceNews", { useNewUrlParser: true})
+// mongoose.connect(MONGODB_URI)
+// mongoose.connect("mongodb://localhost/spaceNews", { useNewUrlParser: true})
 
 app.get("/scrape", function(req, res) {
   axios.get("https://www.space.com/news").then(function(response) {
@@ -52,6 +53,8 @@ app.get("/scrape", function(req, res) {
       result.url = $(this)
         .children(".article-link")
         .attr("href");
+      
+      // result.favorite = false;
 
       // console.log(result)
         if (result) {
