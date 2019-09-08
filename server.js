@@ -23,6 +23,8 @@ app.use(express.json());
 
 app.use(express.static("public"));
 
+mongoose.connect("mongodb://localhost/spaceNews", { useNewUrlParser: true})
+
 app.get("/scrape", function(req, res) {
   axios.get("https://www.space.com/news").then(function(response) {
     // console.log(response.data)
@@ -32,7 +34,7 @@ app.get("/scrape", function(req, res) {
     // console.log(title.text())
     $("div.listingResult").each(function(i, element) {
       let result = {};
-      result.title = $(this)
+        result.title = $(this)
         .children("a")
         .children("article")
         .children(".content")
@@ -52,25 +54,28 @@ app.get("/scrape", function(req, res) {
         .attr("href");
 
       // console.log(result)
-
-      db.Article.create(result)
-        .then(function(dbArticle) {
-          console.log(dbArticle);
-        })
-        .catch(function(err) {
-          console.log(err);
-        });
+        if (result) {
+          // console.log(result)
+          db.Article.create(result)
+          .then(function(scrapedArticle){
+            console.log(scrapedArticle)
+          })
+        } 
+        // function(err, inserted){
+        //   if(err){
+        //     console.log("err")
+        //   }
+        //   else {
+        //     console.log(inserted)
+        //   }
+        // });
+      
+        // };
     });
 
-    // $(".article-name").each(function(i,element){
-    //     let result = {};
-    //     result.title = $(this)
-    //     // .children("h3")
-    //     .text()
-
-    //     console.log(result)
+  
     res.send("Scrape Complete")
-    // })
+  
   });
 });
 
