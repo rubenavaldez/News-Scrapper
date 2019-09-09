@@ -6,12 +6,21 @@
 
     
     {{#each Article}}
+    <div class="article" data-id="{{id}}">
     <h4> {{title}} </h4>
     <p class="flow-text"> {{summary}} </p>
-    <p> <a href="{{url}}">Read More.</a></p>
-    <button id="comment-button" class="btn waves-effect waves-light" type="submit" name="action">Add note
+    <p> <a href="{{url}}">read more...</a></p>
+    <div class="notes">
+    <input id='titleinput' name='title' >
+    <textarea id='bodyinput' name='body'></textarea>
+            <button id="action-btn" class="btn waves-effect waves-light comment" value="{{id}}">comment</button>
+            {{user-input/comment}}
+    </div>
+    {{!-- <button class="btn waves-effect waves-light comment-button" data-id={{id}}" type="submit" name="action" >Add note
     <i class="material-icons right">comment</i>
-  </button>
+  </button> --}}
+    
+  </div>
 
     {{/each}}
 
@@ -33,6 +42,6 @@
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
-{{!-- <script src="/js/index.js"></script> --}}
+<script src="/app/app.js"></script>
 {{!-- <script src="/js/materialize.js"></script> --}}
 

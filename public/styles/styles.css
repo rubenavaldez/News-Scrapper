@@ -1,0 +1,9 @@
+#home {
+    /* background-image: url(https://i.imgur.com/1UdabZN.jpg) */
+}
+
+body {
+    -webkit-text-stroke-width: .6px;
+    -webkit-text-stroke-color: white;
+    background-color: black; 
+}
