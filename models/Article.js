@@ -8,17 +8,20 @@ var ArticleSchema = new Schema({
  
   title: {
     type: String,
-    // required: true
+    // required: true,
+    unique: true
   },
   
   url: {
     type: String,
-    // required: true
+    // required: true,
+    unique: true
   },
   
   summary: {
     type: String,
-   
+    // required: true,
+    unique: true
   },
 
   saved: {
@@ -29,7 +32,10 @@ var ArticleSchema = new Schema({
   note: {
     type: Schema.Types.ObjectId,
     ref:"Note"
-  }
+  },
+  
+  
+   
 });
 
 // This creates our model from the above schema, using mongoose's model method
