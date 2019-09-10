@@ -13,4 +13,6 @@ $( "button" ).click(function() {
           body: $("#bodyinput").val()
         }
     });
+    $("#titleinput").empty()
+    $("#bodyinput").empty()
   });

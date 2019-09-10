@@ -33,6 +33,9 @@ app.engine(
 );
 app.set("view engine", "handlebars");
 
+app.get("/", (req,res)=>{
+  res.redirect('/scrape');
+})
 
 
 app.get("/scrape", function(req, res) {
@@ -77,8 +80,8 @@ app.get("/scrape", function(req, res) {
     });
 
   
-    res.send("Scrape Complete")
-  
+    // res.send("Scrape Complete")
+    res.redirect('/articles');
   });
 });
 
