@@ -107,7 +107,8 @@ app.get("/articles/:id", (req,res)=>{
   db.Article.findOne({ _id: req.params.id})
   .populate("note")
   .then((dbArticle)=> {
-      res.json(dbArticle);
+      res.send(dbArticle.note);
+      // res.redirect('/articles');
   })
   .catch((err)=>{
     res.json(err);
@@ -153,12 +154,13 @@ app.post("/articles/:id", (req,res) =>{
     .then((dbArticle) =>{
       console.log("success")
       res.json(dbArticle)
+      // res.redirect('/articles');
+      // res.render('/partials/user-input/comment')  
       
     })
         .catch((err)=>{
       res.json(err)
-      // res.redirect('/articles');
-      res.render('/partials/user-input/comment')    
+        
   });
 });
 })

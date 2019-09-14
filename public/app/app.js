@@ -16,17 +16,18 @@ $( "button" ).click(function() {
     })
     $("#titleinput").empty()
     $("#bodyinput").empty()
+    location.reload()
     // console.log(window.location)  
-    // window.location.assign("/notes/" + commentID)
+    // window.location.assign("/articles")
 
-    $.ajax({
-      method: "GET",
-      url: "/notes/" + commentID      
-  }).then(function(res){
-    console.log(res.note.title)
-    console.log(res.note)
+  //   $.ajax({
+  //     method: "GET",
+  //     url: "/notes/" + commentID      
+  // }).then(function(res){
+  //   console.log(res.note.title)
+  //   console.log(res.note)
 
-  })
+  // })
 });
 
   
