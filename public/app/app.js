@@ -14,9 +14,12 @@ $( "button" ).click(function() {
           body: $("#bodyinput").val()
         }
     })
+    .then(function(){
+      location.reload()
+    })
     $("#titleinput").empty()
     $("#bodyinput").empty()
-    location.reload()
+    // location.reload()
     // console.log(window.location)  
     // window.location.assign("/articles")
 

@@ -154,7 +154,7 @@ app.post("/articles/:id", (req,res) =>{
     .then((dbArticle) =>{
       console.log("success")
       res.json(dbArticle)
-      // res.redirect('/articles');
+      res.redirect('/articles');
       // res.render('/partials/user-input/comment')  
       
     })

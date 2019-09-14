@@ -9,6 +9,10 @@ body {
     background-color: black; 
 }
 
+input, select, textarea{
+    color: white;
+    font-weight: bold;
+}
 /* .article {
 background-image: url ("https://i.imgur.com/wjjFz0q.jpg")
 } */
