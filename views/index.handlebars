@@ -14,8 +14,17 @@
     <input id='titleinput' name='title' >
     <textarea id='bodyinput' name='body'></textarea>
             <button id="action-btn" class="btn waves-effect waves-light comment" value="{{id}}">comment</button>
-            {{user-input/comment}}
+            {{{user-input/comment}}}
     </div>
+    <p>{{note.title}}</p>
+    <hr>
+    <p>{{note.body}}</p>
+    <p>
+        {{#each Note}}
+        {{title}}
+        {{body}}
+        {{/each}}
+    </p>
     {{!-- <button class="btn waves-effect waves-light comment-button" data-id={{id}}" type="submit" name="action" >Add note
     <i class="material-icons right">comment</i>
   </button> --}}

@@ -89,6 +89,7 @@ app.get("/scrape", function(req, res) {
 
 app.get("/articles", (req, res) => {
   db.Article.find({})
+  .populate("note")
   .then(function(dbArticle){
       res.render("index", {
         Article: dbArticle
@@ -113,6 +114,28 @@ app.get("/articles/:id", (req,res)=>{
   })
 })
 
+app.get("/notes/:id", (req,res)=>{
+  db.Article.findOne({ _id: req.params.id})
+  .populate("note")
+  .then((dbArticle)=> {
+      res.send(dbArticle.note);
+      console.log(dbArticle.note)
+  })
+  .catch((err)=>{
+    res.json(err);
+  })
+  // res.redirect('/articles');
+})
+
+// router.get("/note/:id", (req, res) => {
+//   const id = req.params.id;
+
+//   db.Headline.findById(id).populate("Notes").exec((err, data) => {
+//       res.json(data.comments);
+//       console.log(data.comments + "nothing");
+//   });
+// });
+
 app.post("/articles/:id", (req,res) =>{
   db.Note.create(req.body)
   .then(function(dbNote){
@@ -128,27 +151,17 @@ app.post("/articles/:id", (req,res) =>{
       new:true
     })
     .then((dbArticle) =>{
+      console.log("success")
       res.json(dbArticle)
+      
     })
         .catch((err)=>{
       res.json(err)
-    
+      // res.redirect('/articles');
+      res.render('/partials/user-input/comment')    
   });
 });
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 app.listen(PORT, () => {
   console.log("App is running on port " + PORT);
